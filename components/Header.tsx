@@ -5,6 +5,7 @@ import Container from './Container'
 import Form from 'next/form'
 import Link from 'next/link'
 import CartIcon from './CartIcon'
+import { ShoppingBasket } from 'lucide-react'
 
 
 const Header = () => {
@@ -17,7 +18,16 @@ const Header = () => {
                 </Form>
                 <div className='flex items-center gap-5'>
                     <CartIcon />
-                    <p>Order</p>
+                    <Link href={"/orders"} className='flex items-center text-sm gap-2 border border-gray-200 px-2 py-1 rounded-md shadow-md hover:shadow-none hoverEffect'>
+
+                        <ShoppingBasket className='text-darkBlue w-6 h-6' />
+                        <div className='flex flex-col'>
+                            <p className='text-xs'>
+                                <span className='font-semibold'>0</span>items
+                            </p>
+                            <p className='font-semibold'>Orders</p>
+                        </div>
+                    </Link>
                     <p>Account</p>
                 </div>
             </Container>

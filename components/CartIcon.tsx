@@ -5,14 +5,14 @@ import React from 'react'
 
 const CartIcon = () => {
     return (
-        <Link href={"/cart"} className='flex items-center text-sm gap-2 border border-gray-200 px-2 py-1 rounded-md shadow-md hover:shadow-none'>
+        <Link href={"/cart"} className='flex items-center text-sm gap-2 border border-gray-200 px-2 py-1 rounded-md shadow-md hover:shadow-none hoverEffect'>
 
-            <ShoppingBag />
+            <ShoppingBag className='text-darkBlue w-6 h-6'/>
             <div className='flex flex-col'>
-                <p>
-                    <span>0</span>items
+                <p className='text-xs'>
+                    <span className='font-semibold'>0</span>items
                 </p>
-                <p>cart</p>
+                <p className='font-semibold'>cart</p>
             </div>
         </Link>
     )
