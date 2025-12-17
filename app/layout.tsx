@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const poppins = localFont({
   src: "./fonts/Poppins.woff2",
@@ -23,12 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${poppins.className} antialiased`}>
-
-        <Header />
-        {children}
-      </body>
-    </html>
+    <ClerkProvider dynamic>
+      <html lang="en">
+        <body className={`${poppins.className} antialiased`}>
+          <Header />
+          {children}
+        </body>
+      </html >
+    </ClerkProvider>
   );
 }
