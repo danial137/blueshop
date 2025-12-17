@@ -1,12 +1,15 @@
+import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
 
 
 export default function Home() {
   return (
     <div>
+      <Container>
+        <h2>Eccomerce website</h2>
+        <Button variant={"destructive"}>Click me</Button>
+      </Container>
 
-      <h2>Eccomerce website</h2>
-      <Button variant={"destructive"}>Click me</Button>
     </div>
 
   );
