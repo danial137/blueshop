@@ -1,63 +1,97 @@
 "use client"
-import Image from "next/image"
-import logo from "@/images/logo.png"
-import Container from "./Container"
-import Form from "next/form"
-import Link from "next/link"
-import CartIcon from "./CartIcon"
-import { ShoppingBasket, User2 } from "lucide-react"
-import { ClerkLoaded, SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
-import { currentUser } from "@clerk/nextjs/server"
+import Link from "next/link";
+import React from "react";
+import Form from "next/form";
+import { ClerkLoaded, UserButton } from "@clerk/nextjs";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import Container from "./Container";
+import Image from "next/image";
+import logo from "@/public/logo.png";
+import CartIcon from "./CartIcon";
+import { ShoppingBasket, User } from "lucide-react";
 
-const Header = async() => {
-    const user = await currentUser()
+// import { getMyOrders } from "@/sanity/helpers";
+
+const Header = async () => {
+    const user = await currentUser();
+    const { userId } = await auth();
+    let orders = null;
+    if (userId) {
+        // orders = await getMyOrders(userId);
+    }
+
     return (
-        <header className="w-full bg-white py-4 border-b border-b-gray-400">
-            <Container className="flex items-center justify-between gap-5">
-                <Link href="/">
-                    <Image src={logo} alt="logo" className="w-24" priority />
-                </Link>
+        <div className="bg-white sticky top-0 z-50 border-b border-b-gray-200 py-1">
+            <Container>
+                <header className="flex gap-2 flex-wrap justify-between items-center py-2">
+                    <Link href={"/"}>
+                        <Image
+                            src={logo}
+                            alt="logo"
+                            className="w-24"
+                            width={100}
+                            height={100}
+                        />
+                    </Link>
+                    <Form
+                        action="/search"
+                        className="w-full sm:w-auto sm:flex-1 sm:mx-4 sm:mt-0"
+                    >
+                        <input
+                            type="text"
+                            name="query"
+                            placeholder="Search for products"
+                            className="bg-gray-50 text-gray-800 px-4 py-2.5 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 border border-gray-200 w-full max-w-4xl rounded-md hoverEffect"
+                        />
+                    </Form>
+                    <div className="flex items-center space-x-4 sm:mt-0 flex-1 sm:flex-none">
+                        <CartIcon />
+                        {/* User icons */}
+                        <ClerkLoaded>
+                            {user && (
+                                <Link
+                                    href={"/orders"}
+                                    className="flex items-center text-sm gap-2 border border-gray-200 px-2 py-1 rounded-md shadow-md hover:shadow-none hoverEffect"
+                                >
+                                    <ShoppingBasket className="text-2xl text-darkBlue" />
+                                    <span className="flex flex-col">
+                                        <p className="text-xs">
+                                            <span className="font-semibold">
+                                                {/* {orders && orders?.length > 0 ? orders?.length : 0} */}
+                                            </span>{" "}
+                                            items
+                                        </p>
+                                        <p className="font-semibold">Orders</p>
+                                    </span>
+                                </Link>
+                            )}
 
-                <Form action="/search" className="flex-1">
-                    <input
-                        type="text"
-                        name="query"
-                        placeholder="Search products..."
-                        className="w-full border-2 border-gray-200 px-4 py-2.5 rounded-md focus-visible:border-darkBlue outline-none"
-                    />
-                </Form>
-
-                <div className="flex items-center gap-5">
-                    <CartIcon />
-
-                    <ClerkLoaded>
-                        <SignedIn>
-                            <Link
-                                href="/orders"
-                                className="flex items-center text-sm gap-2 border border-gray-200 px-2 py-1 rounded-md shadow-md hover:shadow-none hoverEffect"
-                            >
-                                <ShoppingBasket className="text-darkBlue w-6 h-6" />
-                                <div className="flex flex-col">
-                                    <p className="text-xs">
-                                        <span className="font-semibold">0</span> items
-                                    </p>
-                                    <p className="font-semibold">Orders</p>
+                            {user ? (
+                                <div className="flex items-center text-sm gap-2 border border-gray-200 px-2 py-1 rounded-md shadow-md hover:shadow-none hoverEffect">
+                                    <UserButton />
+                                    <div className="text-xs">
+                                        <p className="text-gray-400">Welcome Back</p>
+                                        <p className="font-bold">{user?.fullName}</p>
+                                    </div>
                                 </div>
-                            </Link>
-
-                            <UserButton />
-                        </SignedIn>
-
-                        <SignedOut>
-                            <SignInButton>
-                                <User2 className="cursor-pointer" />
-                            </SignInButton>
-                        </SignedOut>
-                    </ClerkLoaded>
-                </div>
+                            ) : (
+                                <Link
+                                    href={"/sign-in"}
+                                    className="flex items-center text-sm gap-2 border border-gray-200 px-2 py-1 rounded-md shadow-md cursor-pointer hover:shadow-none hoverEffect"
+                                >
+                                    <User className="text-2xl text-darkBlue" />
+                                    <span className="flex flex-col">
+                                        <p className="text-xs">Account</p>
+                                        <p className="font-semibold">Login</p>
+                                    </span>
+                                </Link>
+                            )}
+                        </ClerkLoaded>
+                    </div>
+                </header>
             </Container>
-        </header>
-    )
-}
+        </div>
+    );
+};
 
-export default Header
+export default Header;
