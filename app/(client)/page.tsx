@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import DiscountBanner from "@/components/DiscountBanner";
 import { Button } from "@/components/ui/button";
 import { getSale } from "@/sanity/helper";
 
@@ -8,12 +9,7 @@ export default async function Home() {
   console.log(sales)
   return (
     <div>
-      <Container className="py-20">
-        <h2>Eccomerce website</h2>
-        <Button variant={"destructive"}>Click me</Button>
-       
-      </Container>
-
+      <DiscountBanner sales={sales} />
     </div>
 
   );
