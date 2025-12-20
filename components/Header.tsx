@@ -1,5 +1,4 @@
 "use client"
-
 import Image from "next/image"
 import logo from "@/images/logo.png"
 import Container from "./Container"
@@ -8,8 +7,10 @@ import Link from "next/link"
 import CartIcon from "./CartIcon"
 import { ShoppingBasket, User2 } from "lucide-react"
 import { ClerkLoaded, SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs/server"
 
-const Header = () => {
+const Header = async() => {
+    const user = await currentUser()
     return (
         <header className="w-full bg-white py-4 border-b border-b-gray-400">
             <Container className="flex items-center justify-between gap-5">
