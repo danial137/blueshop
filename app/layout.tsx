@@ -4,6 +4,7 @@ import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
+import Footer from "@/components/Footer";
 
 const poppins = localFont({
   src: "./fonts/Poppins.woff2",
@@ -29,6 +30,7 @@ export default function RootLayout({
         <body className={`${poppins.className} antialiased`}>
           <Header />
           {children}
+          <Footer/>
         </body>
       </html >
     </ClerkProvider>
