@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "@/components/Footer";
 
 const poppins = localFont({
-  src: "./fonts/Poppins.woff2",
+  src: "../fonts/Poppins.woff2",
   variable: "--font-poppins",
   weight: "400",
   preload: false,
@@ -30,7 +29,7 @@ export default function RootLayout({
         <body className={`${poppins.className} antialiased`}>
           <Header />
           {children}
-          <Footer/>
+          <Footer />
         </body>
       </html >
     </ClerkProvider>
