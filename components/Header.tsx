@@ -32,7 +32,7 @@ const Header = async () => {
                             height={100}
                         />
                     </Link>
-                    <Form
+                    <form
                         action="/search"
                         className="w-full sm:w-auto sm:flex-1 sm:mx-4 sm:mt-0"
                     >
@@ -42,7 +42,7 @@ const Header = async () => {
                             placeholder="Search for products"
                             className="bg-gray-50 text-gray-800 px-4 py-2.5 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 border border-gray-200 w-full max-w-4xl rounded-md hoverEffect"
                         />
-                    </Form>
+                    </form>
                     <div className="flex items-center space-x-4 sm:mt-0 flex-1 sm:flex-none">
                         <CartIcon />
                         {/* User icons */}
