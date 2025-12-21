@@ -10,6 +10,7 @@ export default async function Home() {
   return (
     <div>
       <DiscountBanner sales={sales} />
+    
     </div>
 
   );
