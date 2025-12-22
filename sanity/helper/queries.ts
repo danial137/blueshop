@@ -7,3 +7,6 @@ export const SALE_QUERY = defineQuery(
 export const PRODUCT_QUERY = defineQuery(
   `*[_type=='product'] | order(nam asc)|order(name asc)`
 );
+
+
+// export const 
