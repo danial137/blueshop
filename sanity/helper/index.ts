@@ -1,5 +1,5 @@
 import { sanityFetch } from "../lib/live";
-import { PRODUCT_QUERY, SALE_QUERY } from "./queries";
+import { CATEGORIES_QUERY, PRODUCT_QUERY, SALE_QUERY } from "./queries";
 
 export const getSale = async () => {
   try {
@@ -21,6 +21,18 @@ export const getAllproducts = async () => {
     return products.data || [];
   } catch (error) {
     console.error("ALL product fetching error:", error);
+    return [];
+  }
+};
+
+export const getAllCategories = async () => {
+  try {
+    const categories = await sanityFetch({
+      query: CATEGORIES_QUERY,
+    });
+    return categories.data || [];
+  } catch (error) {
+    console.error("ALL Categories fetching error:", error);
     return [];
   }
 };

@@ -8,5 +8,6 @@ export const PRODUCT_QUERY = defineQuery(
   `*[_type=='product'] | order(nam asc)|order(name asc)`
 );
 
-
-// export const 
+export const CATEGORIES_QUERY = defineQuery(
+  `*[_type=='category'] | order(nam asc)|order(name asc)`
+);
