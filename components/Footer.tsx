@@ -5,9 +5,9 @@ import payment from '@/images/payment.png'
 const Footer = () => {
     return (
         <footer className='bg-lightBg text-sm'>
-            <Container className='py-5 flex items-center justify-betweens'>
+            <Container className='py-5 flex items-center justify-between gap-20'>
                 <p className='text-gray-500'>
-                    CopyRight © <span className='text-darkBlue'>2025 Blue Shop </span> all rights reserved
+                    CopyRight © <span className='text-darkBlue'>2025 Persian store </span> all rights reserved
                 </p>
                 <Image src={payment} alt="payment" className='w-64 object-cover' />
             </Container>
