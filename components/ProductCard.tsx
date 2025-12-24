@@ -2,12 +2,14 @@ import { Product } from "@/sanity.types"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 import Link from "next/link"
+import ProductCartBar from "./ProductCartBar"
 
 interface Props {
     product: Product
 }
 
 const ProductCard = ({ product }: Props) => {
+    const isStock = product?.stock !== 0;
     return (
         <div className="border border-gray-300 rounded-lg overflow-hidden group text-sm">
             <div className="border-b border-b-gray-300 overflow-hidden relative">
@@ -23,14 +25,18 @@ const ProductCard = ({ product }: Props) => {
                 )}
                 {product?.status && product?.stock !== 0 && (
                     <div className="absolute left-1 top-1 z-10 flex flex-col items-center space-y-1 group-hover:opacity-0">
-                        {product?.status?.split('').map((char, index) =>
+                        {product?.status?.split('').map((char, index) => (
                             <span key={index} className="font-semibold uppercase">{char} </span>
-                        )}
+                        ))}
                     </div>
                 )}
+                {isStock &&
+                    <div className="absolute bottom-5 left-0 w-full">
+                        <ProductCartBar />
+                    </div>}
             </div>
             {/* {description} */}
-            <div>description</div>
+            <div className="p-5">description</div>
         </div>
     )
 }
