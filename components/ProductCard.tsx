@@ -3,6 +3,7 @@ import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 import Link from "next/link"
 import ProductCartBar from "./ProductCartBar"
+import { LuStar } from "react-icons/lu"
 
 interface Props {
     product: Product
@@ -36,10 +37,17 @@ const ProductCard = ({ product }: Props) => {
                     </div>}
             </div>
             {/* {description} */}
-            <div className="p-5 flex fex-col gap-2">
-                <div>
-                    <p>Snakcs</p>
+            <div className="p-5 flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                    <p className="text-gray-500 font-medium">Snakcs</p>
+                    <div className="flex items-center text-gray-500 gap-1">
+                        {Array.from({ length: 5 }).map((_, index) => {
+                            const isLastStar = index === 4
+                            return <LuStar fill={!isLastStar ? "#fca99b" : "transparent"} key={index} className={`${isLastStar ? "text-gray-500" : 'text-lightOrange'}`} />
+                        })}
+                    </div>
                 </div>
+                <p>{product?.name}</p>
             </div>
         </div>
     )
