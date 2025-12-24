@@ -31,12 +31,16 @@ const ProductCard = ({ product }: Props) => {
                     </div>
                 )}
                 {isStock &&
-                    <div className="absolute bottom-5 left-0 w-full">
+                    <div className="absolute bottom-0 left-0 w-full translate-y-12 group-hover:-translate-y-4 hoverEffect">
                         <ProductCartBar />
                     </div>}
             </div>
             {/* {description} */}
-            <div className="p-5">description</div>
+            <div className="p-5 flex fex-col gap-2">
+                <div>
+                    <p>Snakcs</p>
+                </div>
+            </div>
         </div>
     )
 }
