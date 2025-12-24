@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import ProductCartBar from "./ProductCartBar"
 import { LuStar } from "react-icons/lu"
+import PriceView from "./PriceView"
 
 interface Props {
     product: Product
@@ -47,7 +48,8 @@ const ProductCard = ({ product }: Props) => {
                         })}
                     </div>
                 </div>
-                <p>{product?.name}</p>
+                <p className="text-base text-gray-600 tracking-wide font-semibold line-clamp-1 capitalize">{product?.name}</p>
+                <PriceView price={product?.price} discount={product?.discount} label={product?.label} />
             </div>
         </div>
     )
