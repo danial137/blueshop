@@ -13,8 +13,11 @@ export default async function Home() {
 
   return (
     <div>
-      <DiscountBanner sales={sales} />
-      <ProductList products={products} title={true} categories={categories} />
+      <Container>
+        <DiscountBanner sales={sales} />
+        <ProductList products={products} title={true} categories={categories} />
+     </Container>
+      
 
     </div>
 
