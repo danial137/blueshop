@@ -15,7 +15,7 @@ const AddToCartButton = ({ product, className }: Props) => {
     const handleAddToCart = () => {
         toast.success('cart dispatched')
     }
-    const itemCount = 5
+    const itemCount = 0
     return (
         <div>
             {itemCount ? (
