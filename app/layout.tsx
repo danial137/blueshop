@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { SanityLive } from "@/sanity/lib/live";
-// import { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 // import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 // import DisableDraftMode from "@/components/DisableDraftMode";
@@ -36,7 +36,7 @@ export default async function RootLayout({
                         </>
                     )}
                     {children}
-                    {/* <Toaster
+                    <Toaster
                         position="bottom-right"
                         toastOptions={{
                             style: {
@@ -44,7 +44,7 @@ export default async function RootLayout({
                                 color: "#fff",
                             },
                         }}
-                    /> */}
+                    />
                     <SanityLive />
                 </body>
             </html>

@@ -1,6 +1,10 @@
+"use client"
 import { Product } from "@/sanity.types"
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import toast from "react-hot-toast";
+import QuantityButton from "./QuantityButton";
+import PriceFormatter from "./PriceFormatter";
 
 interface Props {
     product: Product;
@@ -8,7 +12,27 @@ interface Props {
 }
 
 const AddToCartButton = ({ product, className }: Props) => {
-    return <Button className={cn('bg-dark-blue/10')}>Add to Cart</Button>
+    const handleAddToCart = () => {
+        toast.success('cart dispatched')
+    }
+    const itemCount = 5
+    return (
+        <div>
+            {itemCount ? (
+                <div className="text-sm">
+                    <div className="flex items-center justify-between">
+                        <span className="text-xs text-muted-foreground">Quantity</span>
+                        <QuantityButton />
+                    </div>
+                    <div>
+                        <span>Subtotal</span>
+                        <PriceFormatter amount={product?.price ? product?.price * itemCount:0}/>
+                    </div>
+                </div>
+            ) : (<Button onClick={handleAddToCart} className={cn('bg-dark-blue/10 text-black border-darkBlue border py-2 mt-2 w-full rounded-md font-medium hover:bg-darkBlue hover:text-white hoverEffect disabled:hover:cursor-not-allowed disabled:bg-darkBlue/10 disabled:text-gray-400 disabled:hover:text-gray-400 disabled:border-darkBlue/10', className)}>Add to Cart</Button>)}
+        </div>
+
+    )
 }
 
 export default AddToCartButton
