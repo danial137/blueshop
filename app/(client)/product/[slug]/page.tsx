@@ -1,4 +1,5 @@
 import Container from '@/components/Container';
+import PriceView from '@/components/PriceView';
 import { getProductBySlug } from '@/sanity/helper';
 import { urlFor } from '@/sanity/lib/image';
 import Image from 'next/image';
@@ -22,8 +23,8 @@ const SingleProductPage = async ({ params }: { params: Promise<{ slug: string }>
                 )}
                 <div className='w-full md:w-1/2 flex flex-col gap-5'>
                     <div>
-                        <p className='text-4xl font-bold mb-3'>{product?.name}</p>
-                        <div>
+                        <p className='text-4xl font-bold mb-2'>{product?.name}</p>
+                        <div className='flex gap-2 items-center'>
                                    <div className="flex items-center text-gray-500 gap-1">
                                                     {Array.from({ length: 5 }).map((_, index) => {
                                                         const isLastStar = index === 4
@@ -33,6 +34,7 @@ const SingleProductPage = async ({ params }: { params: Promise<{ slug: string }>
                             <p className='text-sm font-medium text-gray-500 '>{`(25 review )`}</p>
                         </div>
                     </div>
+                    <PriceView price={product?.price} discount={product?.discount} label={product?.label}  className='text-lg font-bold'/>
                 </div>
             </Container>
         </div>
