@@ -1,10 +1,15 @@
+import AddToCartButton from '@/components/AddToCartButton';
 import Container from '@/components/Container';
 import PriceView from '@/components/PriceView';
 import { getProductBySlug } from '@/sanity/helper';
 import { urlFor } from '@/sanity/lib/image';
 import Image from 'next/image';
+import { FaRegQuestionCircle } from "react-icons/fa";
+import { FiShare2 } from "react-icons/fi";
 import React from 'react'
 import { LuStar } from 'react-icons/lu';
+import { RxBorderSplit } from "react-icons/rx";
+import { TbTruckDelivery } from "react-icons/tb";
 
 const SingleProductPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
@@ -25,16 +30,58 @@ const SingleProductPage = async ({ params }: { params: Promise<{ slug: string }>
                     <div>
                         <p className='text-4xl font-bold mb-2'>{product?.name}</p>
                         <div className='flex gap-2 items-center'>
-                                   <div className="flex items-center text-gray-500 gap-1">
-                                                    {Array.from({ length: 5 }).map((_, index) => {
-                                                        const isLastStar = index === 4
-                                                        return <LuStar fill={!isLastStar ? "#fca99b" : "transparent"} key={index} className={`${isLastStar ? "text-gray-300" : 'text-yellow-400'}`} />
-                                                    })}
-                                                </div>
+                            <div className="flex items-center text-gray-500 gap-1">
+                                {Array.from({ length: 5 }).map((_, index) => {
+                                    const isLastStar = index === 4
+                                    return <LuStar fill={!isLastStar ? "#fca99b" : "transparent"} key={index} className={`${isLastStar ? "text-gray-300" : 'text-yellow-400'}`} />
+                                })}
+                            </div>
                             <p className='text-sm font-medium text-gray-500 '>{`(25 review )`}</p>
                         </div>
                     </div>
-                    <PriceView price={product?.price} discount={product?.discount} label={product?.label}  className='text-lg font-bold'/>
+                    <PriceView price={product?.price} discount={product?.discount} label={product?.label} className='text-lg font-bold' />
+                    {product?.stock && (<p className='bg-green-100 w-24 text-center text-green-600 text-sm py-2.5 font-semibold rounded-lg'>In Stock</p>)}
+                    <p className='text-base text-gray-800'><span className='bg-black text-white px-3 py-1 text-sm font-semibold rounded-md mr-2'>20</span>{""}
+                        people are viewing this right now
+                    </p>
+                    <p className='text-sm text-gray-600 tracking-wide'>{product?.description}</p>
+                    {product && <AddToCartButton product={product} />}
+                    <div className='flex flex-wrap items-center justify-between gap-2.5 border-b border-b-gray-200 py-5 -mt-2'>
+                        <div className='flex items-center gap-2 text-sm text-black hover:text-red-600 hoverEffect'>
+                            <RxBorderSplit className='text-lg' />
+                            <p>Compare color</p>
+                        </div>
+                        <div className='flex items-center gap-2 text-sm text-black hover:text-red-600 hoverEffect'>
+                            <TbTruckDelivery className='text-lg' />
+                            <p>Delivery & Return</p>
+                        </div>
+                        <div className='flex items-center gap-2 text-sm text-black hover:text-red-600 hoverEffect'>
+                            <FiShare2 className='text-lg' />
+                            <p>Share</p>
+                        </div>
+                        <div className='flex items-center gap-2 text-sm text-black hover:text-red-600 hoverEffect'>
+                            <FaRegQuestionCircle className='text-lg' />
+                            <p>Ask a question</p>
+                        </div>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-5">
+                        <div className="border border-darkBlue/20 text-center p-3 hover:border-darkBlue hoverEffect rounded-md">
+                            <p className="text-base font-semibold text-black">
+                                Free Shipping
+                            </p>
+                            <p className="text-sm text-gray-500">
+                                Free shipping over order $120
+                            </p>
+                        </div>
+                        <div className="border border-darkBlue/20 text-center p-3 hover:border-darkBlue hoverEffect rounded-md">
+                            <p className="text-base font-semibold text-black">
+                                Flexible Payment
+                            </p>
+                            <p className="text-sm text-gray-500">
+                                Pay with Multiple Credit Cards
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </Container>
         </div>

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
 import QuantityButton from "./QuantityButton";
 import PriceFormatter from "./PriceFormatter";
+import { useEffect, useState } from "react";
 
 interface Props {
     product: Product;
@@ -12,17 +13,27 @@ interface Props {
 }
 
 const AddToCartButton = ({ product, className }: Props) => {
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true)
+    }, []);
+
+    if (!isClient) {
+        return null
+    }
+
     const handleAddToCart = () => {
         toast.success('cart dispatched')
     }
-    const itemCount = 0
+    const itemCount = 5
     return (
         <div>
             {itemCount ? (
                 <div className="text-sm">
                     <div className="flex items-center justify-between">
                         <span className="text-xs text-muted-foreground">Quantity</span>
-                        <QuantityButton  product={product}/>
+                        <QuantityButton product={product} />
                     </div>
                     <div className="flex items-center justify-between border-t pt-1">
                         <span>Subtotal</span>
