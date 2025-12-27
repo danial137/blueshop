@@ -306,6 +306,44 @@ export type CATEGORIES_QUERY_RESULT = Array<{
   description?: string;
 }>;
 
+// Source: sanity\helper\queries.ts
+// Variable: PRODUCT_BY_SLUG
+// Query: *[_type=='product' && slug.current==$slug ] | order(name)[0]
+export type PRODUCT_BY_SLUG_RESULT = {
+  _id: string;
+  _type: "product";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  description?: string;
+  price?: number;
+  discount?: number;
+  categories?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+  stock?: number;
+  label?: string;
+  status?: "hot" | "new" | "sale";
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -313,5 +351,6 @@ declare module "@sanity/client" {
     "*[_type=='sale'] | order(nam asc)|order(name asc)": SALE_QUERY_RESULT;
     "*[_type=='product'] | order(nam asc)|order(name asc)": PRODUCT_QUERY_RESULT;
     "*[_type=='category'] | order(nam asc)|order(name asc)": CATEGORIES_QUERY_RESULT;
+    "*[_type=='product' && slug.current==$slug ] | order(name)[0]": PRODUCT_BY_SLUG_RESULT;
   }
 }
