@@ -3,6 +3,7 @@ import {
   CATEGORIES_QUERY,
   PRODUCT_BY_SLUG,
   PRODUCT_QUERY,
+  PRODUCT_SEARCH_QUERY,
   SALE_QUERY,
 } from "./queries";
 
@@ -54,5 +55,20 @@ export const getProductBySlug = async (slug: string) => {
   } catch (error) {
     console.error("Product fetching error:", error);
     return null;
+  }
+};
+
+export const searchProductsByName = async (searhParams: string) => {
+  try {
+    const product = await sanityFetch({
+      query: PRODUCT_SEARCH_QUERY,
+      params: {
+        searchParams: searhParams,
+      },
+    });
+    return product?.data || [];
+  } catch (error) {
+    console.error("Product fetching error:", error);
+    return [];
   }
 };

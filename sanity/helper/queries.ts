@@ -15,3 +15,7 @@ export const CATEGORIES_QUERY = defineQuery(
 export const PRODUCT_BY_SLUG = defineQuery(
   `*[_type=='product' && slug.current==$slug ] | order(name)[0]`
 );
+
+export const PRODUCT_SEARCH_QUERY = defineQuery(
+  `*[_type=='product'&& name match $searchParams] | order(name asc)`
+);

@@ -1,9 +1,19 @@
-import React from 'react'
+import { searchProductsByName } from "@/sanity/helper";
 
-const page = () => {
+interface Props {
+    searchParams: {
+        query: string
+    }
+}
+
+const SearchPage = async ({ searchParams }: Props) => {
+    const { query } = await searchParams;
+    const product = await searchProductsByName
+    console.log(product)
+
     return (
         <div>page</div>
     )
 }
 
-export default page
+export default SearchPage
