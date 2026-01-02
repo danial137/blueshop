@@ -8,11 +8,11 @@ interface Props {
 
 const SearchPage = async ({ searchParams }: Props) => {
     const { query } = await searchParams;
-    const product = await searchProductsByName
+    const product = await searchProductsByName(query)
     console.log(product)
 
     return (
-        <div>page</div>
+        <div>SearchPage</div>
     )
 }
 
