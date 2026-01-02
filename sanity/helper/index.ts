@@ -1,3 +1,4 @@
+import SearchPage from "@/app/(client)/search/page";
 import { sanityFetch } from "../lib/live";
 import {
   CATEGORIES_QUERY,
@@ -63,7 +64,7 @@ export const searchProductsByName = async (searhParams: string) => {
     const product = await sanityFetch({
       query: PRODUCT_SEARCH_QUERY,
       params: {
-        searchParams: searhParams,
+      searchParam: searhParams,
       },
     });
     return product?.data || [];
