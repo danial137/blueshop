@@ -7,6 +7,7 @@ import {
   PRODUCT_SEARCH_QUERY,
   SALE_QUERY,
 } from "./queries";
+import { defineQuery } from "next-sanity";
 
 export const getSale = async () => {
   try {
@@ -59,17 +60,21 @@ export const getProductBySlug = async (slug: string) => {
   }
 };
 
-export const searchProductsByName = async (searhParams: string) => {
+export const searchProductsByName = async (searchParam: string) => {
+  const PRODUCT_SEARCH_QUERY = defineQuery(
+    `*[_type == "product" && name match $searchParam] | order(name asc)`
+  );
+
   try {
-    const product = await sanityFetch({
+    const products = await sanityFetch({
       query: PRODUCT_SEARCH_QUERY,
       params: {
-      searchParam: searhParams,
+        searchParam: `${searchParam}`,
       },
     });
-    return product?.data || [];
+    return products?.data || [];
   } catch (error) {
-    console.error("Product fetching error:", error);
+    console.error("Error fetching products by name:", error);
     return [];
   }
 };
