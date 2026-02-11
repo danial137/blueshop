@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { Button } from './ui/button'
 import { ChevronsUpDown } from 'lucide-react'
-import { Command, CommandInput } from './ui/command'
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from './ui/command'
 interface Props {
     categories: Category[]
 }
@@ -31,6 +31,19 @@ const CategorySelector = ({ categories }: Props) => {
                     }
                 }}
                 />
+
+                <CommandList>
+                    <CommandEmpty>No Ctegory found </CommandEmpty>
+                    <CommandGroup>
+                        {categories?.map((category) => (
+                            <CommandItem key={category?._id} value={category?.title} onSelect={() => {
+                                setValue(value === category?._id ? category?._id : category?._id)
+                            }}>
+                                {category?.title}
+                            </CommandItem>
+                        ))}
+                    </CommandGroup>
+                </CommandList>
             </Command>
         </PopoverContent>
     </Popover>
